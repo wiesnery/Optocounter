@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<v-vertical-layout>
+	<v-menu-bar _id="menu"></v-menu-bar>
+	<v-panel _id="pnContent"></v-panel>
+</v-vertical-layout>

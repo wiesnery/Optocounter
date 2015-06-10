@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<v-vertical-layout>
+	<v-vertical-layout>
+		<v-label>Monat:</v-label>
+		<v-native-select _id="year">
+		</v-native-select>
+		<v-native-select _id="month"></v-native-select>
+	</v-vertical-layout>
+	<v-table _id="table" caption="Monatsübersicht"></v-table>
+</v-vertical-layout>
