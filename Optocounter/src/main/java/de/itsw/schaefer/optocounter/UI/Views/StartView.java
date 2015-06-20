@@ -10,7 +10,7 @@ import com.vaadin.ui.declarative.Design;
 @DesignRoot
 @SpringView(name = "")
 public class StartView extends VerticalLayout implements View {
-	
+
 	private static final long serialVersionUID = 1L;
 	static final String name = "";
 

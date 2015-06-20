@@ -12,18 +12,17 @@ import com.vaadin.ui.declarative.Design;
 public class TemplateView extends VerticalLayout implements View {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public MenuBar menu;
 	public Panel pnContent;
-	
+
 	public TemplateView() {
 		Design.read("template.xml", this);
 	}
-	
+
 	@Override
 	public void enter(ViewChangeEvent event) {
-		
-	}
 
+	}
 
 }
