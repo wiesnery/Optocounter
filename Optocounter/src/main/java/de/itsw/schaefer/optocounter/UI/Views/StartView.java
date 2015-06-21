@@ -1,5 +1,7 @@
 package de.itsw.schaefer.optocounter.UI.Views;
 
+import javax.annotation.PostConstruct;
+
 import com.vaadin.annotations.DesignRoot;
 import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
@@ -15,6 +17,11 @@ public class StartView extends VerticalLayout implements View {
 	static final String name = "";
 
 	public StartView() {
+
+	}
+
+	@PostConstruct
+	private void init() {
 		Design.read("startview.xml", this);
 	}
 

@@ -1,5 +1,7 @@
 package de.itsw.schaefer.optocounter.UI.Views;
 
+import javax.annotation.PostConstruct;
+
 import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,12 +32,17 @@ public class MonthView extends VerticalLayout implements View {
 	private static final long serialVersionUID = 1L;
 
 	public MonthView() {
+
+	}
+
+	@PostConstruct
+	private void init() {
 		Design.read("monthview.xml", this);
 
-		prepareTable();
-		prepareYears();
+		this.prepareTable();
+		this.prepareYears();
 
-		fillTable();
+		this.fillTable();
 	}
 
 	private void prepareYears() {
@@ -52,14 +59,14 @@ public class MonthView extends VerticalLayout implements View {
 		this.year.setNullSelectionAllowed(false);
 		this.month.setNullSelectionAllowed(false);
 
-		this.year.addValueChangeListener((l) -> dateChanged());
-		this.month.addValueChangeListener((l) -> dateChanged());
+		this.year.addValueChangeListener((l) -> this.dateChanged());
+		this.month.addValueChangeListener((l) -> this.dateChanged());
 
 	}
 
 	private void dateChanged() {
 		this.table.removeAllItems();
-		fillTable();
+		this.fillTable();
 
 	}
 
@@ -67,18 +74,16 @@ public class MonthView extends VerticalLayout implements View {
 	private void fillTable() {
 		LocalDate date = new LocalDate(
 				((Integer) this.year.getValue()).intValue(),
-				Integer.parseInt(((String) this.month.getValue())), 1);
+				Integer.parseInt((String) this.month.getValue()), 1);
 		LocalDate nextMonth = date.plusMonths(1);
 		while (date.isBefore(nextMonth)) {
 			Item item = this.table.addItem(date.dayOfMonth().get());
 			item.getItemProperty("Tag").setValue(date.dayOfWeek().getAsText());
 			item.getItemProperty("Datum").setValue(date.toString());
 
-			for (Integer i = 1; i < 7; i++) {
-				if (i == 6) {
-					i++;
-					break;
-				}
+			for (Integer i = 1; i <= 8; i++) {
+				if (i == 6) i++;
+
 				Property<Integer> property = item.getItemProperty("H "
 						+ i.toString());
 				property.setValue(37 * i * date.getMonthOfYear()
@@ -86,37 +91,35 @@ public class MonthView extends VerticalLayout implements View {
 			}
 
 			date = date.plusDays(1);
+			
 		}
+		
+		int actualRowCount = date.minusDays(1).getDayOfMonth();
+		table.setPageLength(actualRowCount);
 
 		this.table.setColumnFooter("Datum", "Summe");
 
-		for (Integer i = 1; i < 7; i++) {
-			if (i == 6) {
-				i++;
-				break;
-			}
+		for (Integer i = 1; i <= 8; i++) {
+			if (i == 6) i++;
+
 			Integer sum = 0;
-			for (Object id : this.table.getItemIds()) {
+			for (Object id : this.table.getItemIds())
 				sum += (Integer) this.table.getContainerProperty(id,
 						"H " + i.toString()).getValue();
-			}
 			this.table.setColumnFooter("H " + i.toString(), sum.toString());
 		}
 	}
 
 	private void prepareTable() {
-		this.table.setWidth("100%");
-		this.table.setSelectable(false);
+		this.table.setSelectable(true);
 		this.table.setImmediate(true);
 		this.table.setFooterVisible(true);
 
 		this.table.addContainerProperty("Tag", String.class, null);
 		this.table.addContainerProperty("Datum", String.class, null);
-		for (Integer i = 1; i < 7; i++) {
-			if (i == 6) {
-				i++;
-				break;
-			}
+		for (Integer i = 1; i <= 8; i++) {
+			if (i == 6) i++;
+
 			this.table.addContainerProperty("H " + i.toString(), Integer.class,
 					null);
 		}

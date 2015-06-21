@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<v-vertical-layout>
+<v-vertical-layout size-full :expand>
 	<v-vertical-layout>
 		<v-horizontal-layout>
 			<v-label width="75px">Monat:</v-label>
@@ -18,10 +18,10 @@
 				<option>12</option>
 			</v-native-select>
 		</v-horizontal-layout>
-		<v-horizontal-layout>
+		<v-horizontal-layout :expand>
 			<v-label  width="75px">Jahr:</v-label>
 			<v-native-select _id="year"></v-native-select>
 		</v-horizontal-layout>
 	</v-vertical-layout>
-	<v-table _id="table" caption="Monatsübersicht"></v-table>
+	<v-table _id="table" caption="Monatsübersicht" width-full :expand></v-table>
 </v-vertical-layout>

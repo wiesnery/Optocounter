@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<v-vertical-layout>
+<v-vertical-layout size-full>
 	<v-menu-bar _id="menu"></v-menu-bar>
-	<v-panel _id="pnContent"></v-panel>
+	<v-panel _id="pnContent" size-full :expand></v-panel>
 </v-vertical-layout>

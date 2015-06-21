@@ -15,8 +15,9 @@ public class StartUI extends UI {
 
 	private static final long serialVersionUID = 1L;
 
-	TemplateView templateView = new TemplateView();
-	Navigator navigator = new Navigator(this, this.templateView.pnContent);
+	@Autowired
+	TemplateView templateView;
+	Navigator navigator;
 
 	@Autowired
 	SpringViewProvider viewProvider;
@@ -26,8 +27,9 @@ public class StartUI extends UI {
 
 	@Override
 	protected void init(VaadinRequest request) {
-		setContent(this.templateView);
-
+		navigator = new Navigator(this, this.templateView.pnContent);
+		this.setContent(this.templateView);
+	
 		this.navigator.addProvider(this.viewProvider);
 
 		this.templateView.menu.addItem("Start", (selectedItem) -> {
@@ -35,6 +37,10 @@ public class StartUI extends UI {
 		});
 		this.templateView.menu.addItem("Month", (selectedItem) -> {
 			this.navigator.navigateTo("MonthView");
+		});
+
+		this.templateView.menu.addItem("Dayly", (selectedItem) -> {
+			this.navigator.navigateTo("DayView");
 		});
 	}
 

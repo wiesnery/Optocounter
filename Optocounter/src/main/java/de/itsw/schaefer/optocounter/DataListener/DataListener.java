@@ -1,9 +1,7 @@
 package de.itsw.schaefer.optocounter.DataListener;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import com.sun.jna.NativeLibrary;
 
@@ -11,8 +9,8 @@ import de.itsw.schaefer.optocounter.lib.DELIB;
 import de.itsw.schaefer.optocounter.model.CounterRepository;
 import de.itsw.schaefer.optocounter.model.TimeEntry;
 
-@Component
-@Configurable
+//@Component
+//@Configurable
 public class DataListener {
 
 	private long handle = 0;
@@ -31,9 +29,8 @@ public class DataListener {
 					1);
 			if (count >= 1) {
 				System.out.println("Added " + count + " on No: " + channel);
-				for (long j = 0; j < count; j++) {
+				for (long j = 0; j < count; j++)
 					this.repo.save(new TimeEntry(channel));
-				}
 			}
 		}
 
