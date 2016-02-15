@@ -67,6 +67,10 @@
 			<artifactId>scala-library</artifactId>
 			<version>2.10.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.vaadin.addons</groupId>
+			<artifactId>canvas</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -98,8 +102,14 @@
 				<artifactId>jna</artifactId>
 				<version>4.1.0</version>
 			</dependency>
+			<dependency>
+				<groupId>org.vaadin.addons</groupId>
+				<artifactId>canvas</artifactId>
+				<version>2.1</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
 
 	<build>
 		<plugins>
@@ -109,5 +119,12 @@
 			</plugin>
 		</plugins>
 	</build>
+	
+	<repositories>
+		<repository>
+			<id>vaadin-addons</id>
+   			<url>http://maven.vaadin.com/vaadin-addons</url>
+		</repository>
+	</repositories>
 
 </project>

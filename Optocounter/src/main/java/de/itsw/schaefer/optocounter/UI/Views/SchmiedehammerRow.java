@@ -50,6 +50,7 @@ public class SchmiedehammerRow extends HorizontalLayout {
 	public void setHours(int begin, int end) {
 		for(int i = 1;i<=end-begin;i++) {
 			HourView view = helper.getHourView();
+			view.setQuarterHours();
 			//changes to view
 			this.values.addComponent(view);
 		}

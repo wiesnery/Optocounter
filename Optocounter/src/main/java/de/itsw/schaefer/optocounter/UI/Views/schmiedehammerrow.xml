@@ -4,7 +4,7 @@
 		<v-label _id="nr" width-auto :right :middle></v-label>
 	</v-vertical-layout>
 
-	<v-horizontal-layout _id="values" :expand="0.8"></v-horizontal-layout>
+	<v-horizontal-layout _id="values" size-full :expand="0.8"></v-horizontal-layout>
 	<v-vertical-layout width="40px" height-full>
 		<v-label _id="sum" width-auto :center></v-label>
 	</v-vertical-layout>
