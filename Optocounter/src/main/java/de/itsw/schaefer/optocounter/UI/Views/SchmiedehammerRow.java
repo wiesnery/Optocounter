@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import com.vaadin.annotations.DesignRoot;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Panel;
 import com.vaadin.ui.declarative.Design;
 
 import de.itsw.schaefer.optocounter.model.CounterRepository;

@@ -27,6 +27,8 @@ public class QuarterView extends HorizontalLayout {
 	@PostConstruct
 	private void init() {
 		Design.read("quarterview.xml", this);
+		canvas.setFillStyle("green");
+		canvas.fillRect(10, 10, 20, 20);
 	}
 	
 	

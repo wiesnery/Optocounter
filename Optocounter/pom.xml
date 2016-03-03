@@ -22,6 +22,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<start-class>de.itsw.schaefer.optocounter.Application</start-class>
 		<java.version>1.8</java.version>
+		<vaadin.plugin.version>7.6.2</vaadin.plugin.version>
 	</properties>
 
 	<dependencies>
@@ -36,7 +37,7 @@
 		<dependency>
 			<groupId>com.vaadin</groupId>
 			<artifactId>vaadin-spring-boot-starter</artifactId>
-			<version>1.0.0.beta3</version>
+			<version>1.0.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -46,7 +47,6 @@
 		<dependency>
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -78,7 +78,7 @@
 			<dependency>
 				<groupId>com.vaadin</groupId>
 				<artifactId>vaadin-bom</artifactId>
-				<version>7.4.2</version>
+				<version>7.6.2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -109,7 +109,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-	
+
 
 	<build>
 		<plugins>
@@ -117,13 +117,79 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>com.vaadin</groupId>
+				<artifactId>vaadin-maven-plugin</artifactId>
+				<version>${vaadin.plugin.version}</version>
+				<configuration>
+					<extraJvmArgs>-Xmx1g -Xss1024k</extraJvmArgs>
+
+					<!-- We are doing "inplace" gwt compilation but into subdir VAADIN/widgetsets -->
+					<webappDirectory>src/main/resources/VAADIN/widgetsets
+					</webappDirectory>
+					<hostedWebapp>src/main/resources/VAADIN/widgetsets
+					</hostedWebapp>
+					<noServer>true</noServer>
+					<!-- Remove draftCompile when project is ready -->
+					<draftCompile>true</draftCompile>
+					<persistentunitcachedir>${project.build.directory}/gwtdirt</persistentunitcachedir>
+					<compileReport>false</compileReport>
+					<style>OBF</style>
+					<strict>true</strict>
+					<!-- Symbol maps etc, not needed in vaadin app, just target them outside 
+						war -->
+					<deploy>${project.build.directory}/gwt-deploy</deploy>
+				</configuration>
+				<executions>
+					<execution>
+						<configuration>
+							<!-- <modules>
+								<module>org.vaadin.hezamu.canvas</module>
+							</modules> -->
+							<!-- if you don't specify any modules, the plugin will find them -->
+							<!-- <modules> <module>com.vaadin.demo.mobilemail.gwt.ColorPickerWidgetSet</module> 
+								</modules> -->
+						</configuration>
+						<goals>
+							<goal>clean</goal>
+							<goal>resources</goal>
+							<!-- These are non functional currently with spring boot directory 
+								structure <goal>update-theme</goal> <goal>compile-theme</goal> -->
+							<goal>update-widgetset</goal>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<!-- ensure freshly compiled widgetset to jar, TODO check vaadin plugin 
+						configuration could get rid of this -->
+					<execution>
+						<id>copy-resources</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${basedir}/target/classes/VAADIN</outputDirectory>
+							<resources>
+								<resource>
+									<directory>${basedir}/src/main/resources/VAADIN</directory>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
-	
+
 	<repositories>
 		<repository>
 			<id>vaadin-addons</id>
-   			<url>http://maven.vaadin.com/vaadin-addons</url>
+			<url>http://maven.vaadin.com/vaadin-addons</url>
 		</repository>
 	</repositories>
 
