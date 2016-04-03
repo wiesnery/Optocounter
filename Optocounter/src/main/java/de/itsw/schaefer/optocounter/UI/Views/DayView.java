@@ -51,6 +51,7 @@ public class DayView extends VerticalLayout implements View {
 			SchmiedehammerRow row = rowHelper.getRowView();
 			row.setNr(i);
 			row.setHours(6,22);
+			
 			this.vRows.add(row);
 			this.addComponent(row);
 		}

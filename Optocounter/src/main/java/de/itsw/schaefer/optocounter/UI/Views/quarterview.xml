@@ -1,3 +1,2 @@
 <!DOCTYPE html>
-<horizontal-layout size-full :expand="">
-</horizontal-layout>
+<horizontal-layout size-full :expand=""></horizontal-layout>

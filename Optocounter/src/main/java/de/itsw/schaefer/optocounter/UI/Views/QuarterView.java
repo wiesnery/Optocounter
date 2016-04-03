@@ -19,6 +19,9 @@ public class QuarterView extends HorizontalLayout {
 	
 	private Canvas canvas;
 	
+	private int time;
+	private int values;
+	
 	public QuarterView() {
 		canvas = new Canvas();
 		this.addComponent(canvas);
@@ -27,8 +30,12 @@ public class QuarterView extends HorizontalLayout {
 	@PostConstruct
 	private void init() {
 		Design.read("quarterview.xml", this);
-		canvas.setFillStyle("green");
-		canvas.fillRect(10, 10, 20, 20);
+		canvas.setStrokeStyle("grey");
+		canvas.moveTo(0, 0);
+		canvas.lineTo(0, getHeight());
+		canvas.stroke();
+		canvas.closePath();
+		
 	}
 	
 	

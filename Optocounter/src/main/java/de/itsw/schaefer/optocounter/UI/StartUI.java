@@ -44,6 +44,10 @@ public class StartUI extends UI {
 		this.templateView.menu.addItem("Dayly", (selectedItem) -> {
 			this.navigator.navigateTo("DayView");
 		});
+		
+		this.templateView.menu.addItem("Status", (selectedItem) -> {
+			this.navigator.navigateTo("StatusView");
+		});
 	}
 
 }

@@ -5,6 +5,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
+import org.vaadin.hezamu.canvas.Canvas;
 
 import com.vaadin.annotations.DesignRoot;
 import com.vaadin.ui.HorizontalLayout;
@@ -29,7 +30,7 @@ public class SchmiedehammerRow extends HorizontalLayout {
 	private PrototypeBeanHelper helper;
 
 	public SchmiedehammerRow() {
-
+		
 	}
 
 	@PostConstruct
@@ -39,21 +40,30 @@ public class SchmiedehammerRow extends HorizontalLayout {
 
 	private void fillValues() {
 		this.sum.setValue("37");
+		this.helper.getHourView().fill(10, Integer.parseInt(this.sum.getValue()));
 	}
 
 	public void setNr(Integer nr) {
 		this.nr.setValue("<h1>" + nr.toString() + "</h1>");
 		this.fillValues();
 	}
+	
+	@SuppressWarnings("deprecation")
+	public int getNr() {
+		return Integer.parseInt(this.nr.toString());
+	}
 
 	public void setHours(int begin, int end) {
 		for(int i = 1;i<=end-begin;i++) {
 			HourView view = helper.getHourView();
+			view.setId(Integer.toString(i));
 			view.setQuarterHours();
 			//changes to view
 			this.values.addComponent(view);
 		}
 		
 	}
+	
+	
 
 }
