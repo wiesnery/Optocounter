@@ -30,6 +30,7 @@ public class StartUI extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 		navigator = new Navigator(this, this.templateView.pnContent);
+		
 		this.setContent(this.templateView);
 	
 		this.navigator.addProvider(this.viewProvider);

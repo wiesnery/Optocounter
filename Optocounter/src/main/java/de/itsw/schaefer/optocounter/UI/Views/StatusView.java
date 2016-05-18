@@ -9,6 +9,7 @@ import com.vaadin.navigator.View;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.spring.annotation.SpringView;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Table;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.declarative.Design;
 
@@ -18,6 +19,7 @@ import com.vaadin.ui.declarative.Design;
 public class StatusView extends VerticalLayout implements View {
 	
 	private Label label;
+	private Table table;
 	
 	@PostConstruct
 	private void init() {
@@ -26,8 +28,8 @@ public class StatusView extends VerticalLayout implements View {
 	}
 	
 	public StatusView() {
-		label = new Label("Version: 1.0.0");
-		this.addComponent(label);
+		table = new Table();
+		table.setColumnFooter("Eigenschaft", "Wert");
 	}
 	
 	

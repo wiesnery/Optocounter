@@ -1,5 +1,7 @@
 package de.itsw.schaefer.optocounter.UI.Views;
 
+import java.util.Date;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,10 @@ public class QuarterView extends HorizontalLayout {
 	private int time;
 	private int values;
 	
+	private int nr;
+	private Date start;
+	private Date end;
+	
 	public QuarterView() {
 		canvas = new Canvas();
 		this.addComponent(canvas);
@@ -34,8 +40,13 @@ public class QuarterView extends HorizontalLayout {
 		canvas.moveTo(0, 0);
 		canvas.lineTo(0, getHeight());
 		canvas.stroke();
-		canvas.closePath();
 		
+	}
+	
+	public void init(int nr, Date start, Date end) {
+		this.nr=nr;
+		this.start=start;
+		this.end=end;
 	}
 	
 	
